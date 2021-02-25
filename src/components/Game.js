@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom'
 
 import { smallImage } from '../utils'
 
+//Animation
+import { popUp } from '../animations'
+
 export default function Game({ data }) {
 	//Load detail handler
 	const dispatch = useDispatch()
@@ -17,7 +20,12 @@ export default function Game({ data }) {
 	}
 
 	return (
-		<StyledGame onClick={loadDetailhandler}>
+		<StyledGame
+			variants={popUp}
+			initial="hidden"
+			animate="show"
+			onClick={loadDetailhandler}
+		>
 			<Link to={`game/${data.id}`}>
 				<h3>{data.name}</h3>
 				<p>{data.released}</p>

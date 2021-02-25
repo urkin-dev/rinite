@@ -6,9 +6,12 @@ import Game from '../components/Game'
 import GameDetail from '../components/GameDetail'
 
 import styled from 'styled-components'
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import { useLocation } from 'react-router-dom'
+
+//Animation
+import { fadeIn } from '../animations'
 
 export default function Home() {
 	const location = useLocation()
@@ -24,7 +27,7 @@ export default function Home() {
 	)
 
 	return (
-		<GameList>
+		<GameList variants={fadeIn} initial="hidden" animate="show">
 			{pathId && <GameDetail />}
 			{searched.length ? (
 				<div className="searched">

@@ -7,6 +7,9 @@ import { motion } from 'framer-motion'
 import { fetchSearched } from '../actions/gamesAction'
 import { useDispatch } from 'react-redux'
 
+//Animations
+import { fadeIn } from '../animations'
+
 export default function Nav() {
 	const dispatch = useDispatch()
 	const [textInput, setTextInput] = useState('')
@@ -29,7 +32,7 @@ export default function Nav() {
 	}
 
 	return (
-		<StyledNav>
+		<StyledNav variants={fadeIn} initial="hidden" animate="show">
 			<Logo onClick={clearSearched}>
 				<h1>Rinite</h1>
 			</Logo>
