@@ -5,11 +5,14 @@ import { useDispatch } from 'react-redux'
 import { loadDetail } from '../actions/detailAction'
 import { Link } from 'react-router-dom'
 
+import { smallImage } from '../utils'
+
 export default function Game({ data }) {
-	//Load detail
+	//Load detail handler
 	const dispatch = useDispatch()
 
 	const loadDetailhandler = () => {
+		document.body.style.overflow = `hidden`
 		dispatch(loadDetail(data.id, data.short_screenshots))
 	}
 
@@ -18,7 +21,7 @@ export default function Game({ data }) {
 			<Link to={`game/${data.id}`}>
 				<h3>{data.name}</h3>
 				<p>{data.released}</p>
-				<img src={data.background_image} alt={data.name} />
+				<img src={smallImage(data.background_image, 640)} alt={data.name} />
 			</Link>
 		</StyledGame>
 	)
@@ -31,19 +34,6 @@ const StyledGame = styled(motion.div)`
 	border-radius: 1rem;
 	cursor: pointer;
 	overflow: hidden;
-
-	h3 {
-		font-size: 1.3rem;
-		color: #333;
-		padding: 1.5rem 1rem;
-		height: 90px;
-	}
-
-	p {
-		font-size: 1.2rem;
-		line-height: 200%;
-		color: #696969;
-	}
 
 	img {
 		width: 100%;

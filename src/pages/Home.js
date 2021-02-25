@@ -6,7 +6,7 @@ import Game from '../components/Game'
 import GameDetail from '../components/GameDetail'
 
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion'
 
 import { useLocation } from 'react-router-dom'
 
@@ -19,11 +19,25 @@ export default function Home() {
 		dispatch(loadGames())
 	}, [dispatch])
 
-	const { popular, newGames, upcoming } = useSelector((state) => state.games)
+	const { popular, newGames, upcoming, searched } = useSelector(
+		(state) => state.games
+	)
 
 	return (
 		<GameList>
 			{pathId && <GameDetail />}
+			{searched.length ? (
+				<div className="searched">
+					<h2 className="section-title">Searched games</h2>
+					<Games>
+						{searched.map((game) => (
+							<Game data={game} key={game.id} />
+						))}
+					</Games>
+				</div>
+			) : (
+				''
+			)}
 			<h2 className="section-title">Upcoming games</h2>
 			<Games>
 				{upcoming.map((game) => (
